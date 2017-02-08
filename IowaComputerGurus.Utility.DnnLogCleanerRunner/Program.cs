@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IowaComputerGurus.Utility.DnnLogCleaner;
-using IowaComputerGurus.Utility.DnnLogCleaner.Factories;
+﻿using IowaComputerGurus.Utility.DnnLogCleaner.Factories;
 using IowaComputerGurus.Utility.DnnLogCleaner.Jobs;
+using IowaComputerGurus.Utility.DnnLogCleaner.Providers;
+using IowaComputerGurus.Utility.DnnLogCleaner.Services;
 using log4net;
 using log4net.Config;
 using Ninject;
@@ -18,7 +14,7 @@ namespace IowaComputerGurus.Utility.DnnLogCleanerRunner
     {
         private static IKernel _kernel;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //Setup log4net
             XmlConfigurator.Configure();
@@ -36,6 +32,8 @@ namespace IowaComputerGurus.Utility.DnnLogCleanerRunner
             _kernel = new StandardKernel();
             _kernel.Bind<ICleanupSitesJob>().To<CleanupSitesJob>();
             _kernel.Bind<ILogCleanupJobFactory>().ToFactory();
+            _kernel.Bind<IConfigurationProvider>().To<JsonConfigurationProvider>();
+            _kernel.Bind<ILocalFileService>().To<LocalFileService>();
             _kernel.Bind<ILog>().ToProvider<LogProvider>();
         }
 

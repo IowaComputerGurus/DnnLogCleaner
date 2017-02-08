@@ -61,7 +61,7 @@ namespace IowaComputerGurus.Utility.DnnLogCleaner.Tests.Providers
             //Arrange
             var toSave = new List<SiteCleanupConfiguration>
             {
-                new SiteCleanupConfiguration {CleanupType = CleanupType.LocalFileSystem, DnnRootDirectoryPath = "/", LogHistoryDaysToKeep = 5, SiteName = "Test Site"}
+                new SiteCleanupConfiguration {CleanupType = CleanupType.LocalFileSystem, DnnRootDirectoryPath = "", LogHistoryDaysToKeep = 5, SiteName = "Test Site"}
             };
 
             File.WriteAllText("sites.json", JsonConvert.SerializeObject(toSave));
@@ -72,6 +72,26 @@ namespace IowaComputerGurus.Utility.DnnLogCleaner.Tests.Providers
             //Assert
             Assert.IsNotNull(sites);
             Assert.AreEqual(1, sites.Count);
+        }
+
+        [TestMethod]
+        public void SitesToCleanShouldReturnMultipleItemsWhenProperObjectExists()
+        {
+            //Arrange
+            var toSave = new List<SiteCleanupConfiguration>
+            {
+                new SiteCleanupConfiguration {CleanupType = CleanupType.LocalFileSystem, DnnRootDirectoryPath = "/", LogHistoryDaysToKeep = 5, SiteName = "Test Site"},
+                new SiteCleanupConfiguration {CleanupType = CleanupType.LocalFileSystem, DnnRootDirectoryPath = "C:\\Users\\Mitch\\Desktop\\Test", LogHistoryDaysToKeep = 5, SiteName = "Second Site" }
+            };
+
+            File.WriteAllText("sites.json", JsonConvert.SerializeObject(toSave));
+
+            //Act
+            var sites = _provider.SitesToClean;
+
+            //Assert
+            Assert.IsNotNull(sites);
+            Assert.AreEqual(2, sites.Count);
         }
     }
 }

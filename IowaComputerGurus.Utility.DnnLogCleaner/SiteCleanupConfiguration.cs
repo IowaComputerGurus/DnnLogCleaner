@@ -1,4 +1,7 @@
-﻿namespace IowaComputerGurus.Utility.DnnLogCleaner
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace IowaComputerGurus.Utility.DnnLogCleaner
 {
     /// <summary>
     ///     Configuration information for a single site to be cleaned up
@@ -9,6 +12,7 @@
         ///     Gets or sets the type of the cleanup.
         /// </summary>
         /// <value>The type of the cleanup.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
         public CleanupType CleanupType { get; set; }
 
         /// <summary>

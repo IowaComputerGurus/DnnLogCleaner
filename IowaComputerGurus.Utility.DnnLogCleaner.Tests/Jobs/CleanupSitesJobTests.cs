@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using IowaComputerGurus.Utility.DnnLogCleaner.Factories;
 using IowaComputerGurus.Utility.DnnLogCleaner.Jobs;
 using IowaComputerGurus.Utility.DnnLogCleaner.Providers;
@@ -15,10 +11,10 @@ namespace IowaComputerGurus.Utility.DnnLogCleaner.Tests.Jobs
     [TestClass]
     public class CleanupSitesJobTests
     {
-        private Mock<ILogCleanupJobFactory> _logCleanupJobFactoryMock;
         private Mock<IConfigurationProvider> _configurationProviderMock;
-        private Mock<ILog> _loggerMock;
         private ICleanupSitesJob _job;
+        private Mock<ILogCleanupJobFactory> _logCleanupJobFactoryMock;
+        private Mock<ILog> _loggerMock;
 
         [TestInitialize]
         public void Setup()
@@ -26,7 +22,8 @@ namespace IowaComputerGurus.Utility.DnnLogCleaner.Tests.Jobs
             _logCleanupJobFactoryMock = new Mock<ILogCleanupJobFactory>();
             _configurationProviderMock = new Mock<IConfigurationProvider>();
             _loggerMock = new Mock<ILog>();
-            _job = new CleanupSitesJob(_logCleanupJobFactoryMock.Object, _configurationProviderMock.Object, _loggerMock.Object);
+            _job = new CleanupSitesJob(_logCleanupJobFactoryMock.Object, _configurationProviderMock.Object,
+                _loggerMock.Object);
         }
 
         [TestMethod]
@@ -53,21 +50,6 @@ namespace IowaComputerGurus.Utility.DnnLogCleaner.Tests.Jobs
             _loggerMock.Verify(l => l.Error("No sites found, nothing to process"), Times.Once);
         }
 
-        [TestMethod]
-        public void CleanSitesShouldCallFactoryMethodToCreateLocalFileCleanupJobWhenConfigured()
-        {
-            //TODO: See how to better test this
-            //Arrange
-            var jobs = new List<SiteCleanupConfiguration> {new SiteCleanupConfiguration {CleanupType = CleanupType.LocalFileSystem, SiteName = "Test"}};
-            _configurationProviderMock.Setup(c => c.SitesToClean).Returns(jobs);
-            _logCleanupJobFactoryMock.Setup(lf => lf.CreateLocalFileSystemCleanupJob()).Returns(new LocalFileSystemLogCleanupJob(_loggerMock.Object));
-
-            //Act
-            _job.CleanSites();
-
-            //Assert
-            _logCleanupJobFactoryMock.Verify(f => f.CreateLocalFileSystemCleanupJob(), Times.Once);
-        }
-        
+        //TODO: Figure out how to test past the Ninject Factory stuff
     }
 }

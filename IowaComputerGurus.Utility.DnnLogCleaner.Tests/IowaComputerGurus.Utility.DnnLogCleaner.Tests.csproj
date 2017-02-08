@@ -67,8 +67,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Jobs\CleanupSitesJobTests.cs" />
+    <Compile Include="Jobs\LocalFileSystemLogCleanupJobTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\JsonConfigurationProviderTests.cs" />
+    <Compile Include="Services\LocalFileServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IowaComputerGurus.Utility.DnnLogCleaner\IowaComputerGurus.Utility.DnnLogCleaner.csproj">
