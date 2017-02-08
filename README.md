@@ -32,11 +32,12 @@ To aid in configuration a JSON formatted collection of "Sites to Clean" is used 
 
 ### Configuration Field Details
 
-Field | Description
-CleanupType | _LocalFileSystem_ is the only support tyle at this time
-SiteName | Friendly name for the site used for reporting processes
-DnnRootDirectoryPath | This is the full directory path to the site.  Should be to the root DNN folder only, nothing else, and any \ characters must be escaped
-LogHistoryDaysToKeep | How many days of history should be retained
+|Field | Description|
+|---|---|
+|CleanupType | _LocalFileSystem_ is the only support tyle at this time|
+|SiteName | Friendly name for the site used for reporting processes|
+|DnnRootDirectoryPath | This is the full directory path to the site.  Should be to the root DNN folder only, nothing else, and any \ characters must be escaped|
+|LogHistoryDaysToKeep | How many days of history should be retained|
 
 ## Future Plans
 
