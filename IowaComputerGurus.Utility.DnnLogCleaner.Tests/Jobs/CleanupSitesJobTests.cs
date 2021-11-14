@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IowaComputerGurus.Utility.DnnLogCleaner.Factories;
+﻿using IowaComputerGurus.Utility.DnnLogCleaner.Factories;
 using IowaComputerGurus.Utility.DnnLogCleaner.Jobs;
 using IowaComputerGurus.Utility.DnnLogCleaner.Providers;
 using log4net;
